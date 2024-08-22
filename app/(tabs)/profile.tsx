@@ -15,7 +15,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-const colorScheme = useColorScheme();
+// const colorScheme = useColorScheme();
 
 export default function ProfileScreen() {
   return (
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
-    backgroundColor: Colors[colorScheme ?? 'light'].background
+    backgroundColor: Colors['light'].background
   },
   scrollView: {
     marginHorizontal: 20,
