@@ -11,7 +11,6 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -22,6 +21,7 @@ export default function HistoryScreen() {
     <SafeAreaView style={styles.container}>
     <ScrollView style={styles.scrollView}>
       <ThemedView style={styles.stepContainer}>
+      <ThemedText type="subtitle">Hello</ThemedText>
         <ThemedText type="subtitle">Subtitle</ThemedText>
         <ThemedText type="default">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
