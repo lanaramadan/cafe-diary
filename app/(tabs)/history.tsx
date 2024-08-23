@@ -15,7 +15,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-// import { Map } from '@/components/Map';
+import { Map } from '@/components/Map';
 import MapView from 'react-native-maps';
 import {Marker} from 'react-native-maps';
 
@@ -26,11 +26,7 @@ export default function HistoryScreen() {
     <SafeAreaView style={styles.container}>
     <ScrollView style={styles.scrollView}>
       <ThemedView style={styles.stepContainer}>
-      <ThemedText type="subtitle">Hello</ThemedText>
-
-        <MapView style={styles.map} />
-
-        <ThemedText type="subtitle">Subtitle</ThemedText>
+        <Map />
         <ThemedText type="default">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -61,15 +57,5 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginHorizontal: 20,
-  },
-
-  mapContainer: {
-    flex: 1,
-  },
-  map: {
-    height: 375,
-    borderRadius: 35,
-    borderWidth: 4,
-    borderColor: Colors['light'].primaryPink
   },
 });
