@@ -6,7 +6,8 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
-  StatusBar, } from 'react-native';
+  StatusBar,
+  View, } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -17,6 +18,8 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 import { CafeSearch } from '@/components/CafeSearch';
+import { StarSelect } from '@/components/StarSelect';
+
 import { CafeData } from '@/components/types/CafeData';
 
 import { useState } from 'react';
@@ -25,25 +28,44 @@ import { useState } from 'react';
 
 export default function AddCafeScreen() {
   const [cafeData, setCafeData] = useState<CafeData | null>(null);
+  const [starCount, setStarCount] = useState<Number>(3);
 
   const handleCafeSelect = (data: CafeData) => {
     setCafeData(data);
   };
   
+  const handleStarSelect = (value: Number) => {
+    setStarCount(value);
+  };
+  
+
   return (
     <SafeAreaView style={styles.container}>
     <ScrollView style={styles.scrollView} keyboardShouldPersistTaps='always'>
       <ThemedView style={styles.stepContainer}>
-        <CafeSearch onCafeSelect={handleCafeSelect} />
-        {cafeData && (
-            <>
-              <ThemedText type="subtitle">Selected Cafe:</ThemedText>
-              <ThemedText type="default">{cafeData.name}</ThemedText>
-              <ThemedText type="default">{cafeData.address}</ThemedText>
-              <ThemedText type="default">{cafeData.location.latitude}, {cafeData.location.longitude}</ThemedText>
-            </>
-          )}
-        <ThemedText type="subtitle">Subtitle</ThemedText>
+        <View>
+          <CafeSearch onCafeSelect={handleCafeSelect} />
+          {cafeData && (
+              <>
+                <ThemedText type="subtitle">Selected Cafe:</ThemedText>
+                <ThemedText type="default">{cafeData.name}</ThemedText>
+                <ThemedText type="default">{cafeData.address}</ThemedText>
+                <ThemedText type="default">{cafeData.location.lat}, {cafeData.location.lng}</ThemedText>
+              </>
+            )}
+        </View>
+
+        <View style={styles.questionContainer}>
+          <ThemedText type="subtitle">How would you rate your overall experience?</ThemedText>
+          <StarSelect onStarSelect={handleStarSelect}/>
+          {starCount && (
+              <>
+                <ThemedText type="subtitle">Selected Star Count:</ThemedText>
+                <ThemedText type="default">{starCount.toString()}</ThemedText>
+              </>
+            )}
+        </View>
+
         <ThemedText type="default">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -65,7 +87,12 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 8,
   },
-
+  questionContainer: {
+    gap: 8,
+    marginBottom: 8,
+    // flex: 1,
+    alignItems: 'left'
+  },
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
