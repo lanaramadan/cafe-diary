@@ -44,7 +44,7 @@ if (getRNMinorVersion() >= 75) {
   }
 }
 
-rootProject.name = 'cafe-diary'
+rootProject.name = 'café diary'
 
 dependencyResolutionManagement {
   versionCatalogs {

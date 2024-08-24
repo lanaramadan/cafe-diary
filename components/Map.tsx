@@ -19,7 +19,7 @@ export const Map: React.FC = () => {
   const [region, setRegion] = useState<Region>({
     latitude: 37.78825,
     longitude: -122.4324,
-    latitudeDelta: 0.07,
+    latitudeDelta: 0.0000,
     longitudeDelta: 0.0121,
   });
 

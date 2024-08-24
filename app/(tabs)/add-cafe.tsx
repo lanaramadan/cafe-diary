@@ -5,6 +5,7 @@ import {
   Text,
   SafeAreaView,
   ScrollView,
+  FlatList,
   StatusBar, } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
@@ -15,13 +16,33 @@ import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+import { CafeSearch } from '@/components/CafeSearch';
+import { CafeData } from '@/components/types/CafeData';
+
+import { useState } from 'react';
+
 // const colorScheme = useColorScheme();
 
-export default function TabTwoScreen() {
+export default function AddCafeScreen() {
+  const [cafeData, setCafeData] = useState<CafeData | null>(null);
+
+  const handleCafeSelect = (data: CafeData) => {
+    setCafeData(data);
+  };
+  
   return (
     <SafeAreaView style={styles.container}>
-    <ScrollView style={styles.scrollView}>
+    <ScrollView style={styles.scrollView} keyboardShouldPersistTaps='always'>
       <ThemedView style={styles.stepContainer}>
+        <CafeSearch onCafeSelect={handleCafeSelect} />
+        {cafeData && (
+            <>
+              <ThemedText type="subtitle">Selected Cafe:</ThemedText>
+              <ThemedText type="default">{cafeData.name}</ThemedText>
+              <ThemedText type="default">{cafeData.address}</ThemedText>
+              <ThemedText type="default">{cafeData.location.latitude}, {cafeData.location.longitude}</ThemedText>
+            </>
+          )}
         <ThemedText type="subtitle">Subtitle</ThemedText>
         <ThemedText type="default">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

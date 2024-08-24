@@ -10,7 +10,7 @@ export const StatisticsSection: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <StatisticBox value={17} label="cafés visited" />
+      <StatisticBox value={20} label="cafés visited" />
       <StatisticBox
         value={4}
         label="favorited cafés" 
