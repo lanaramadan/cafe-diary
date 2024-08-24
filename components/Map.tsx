@@ -7,8 +7,8 @@ import {Marker} from 'react-native-maps';
 
 interface MarkerData {
     location: {
-      latitude: number;
-      longitude: number;
+      lat: number;
+      lng: number;
     };
     title: string;
     description: string;
