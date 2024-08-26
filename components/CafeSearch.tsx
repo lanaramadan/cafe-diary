@@ -16,7 +16,7 @@ interface CafeSearchProps {
   onCafeSelect: (CafeData: CafeData) => void;
 }
 
-export const CafeSearch: React.FC = ({ onCafeSelect }) => {
+export const CafeSearch: React.FC<CafeSearchProps> = ({ onCafeSelect }) => {
   return (
     <GooglePlacesAutocomplete
       styles={styles.searchBar}
@@ -33,17 +33,13 @@ export const CafeSearch: React.FC = ({ onCafeSelect }) => {
         const CafeData: CafeData = {
           name: data?.structured_formatting?.main_text || '',
           address: details?.formatted_address || '',
-          location: details?.geometry?.location || { latitude: 0, longitude: 0 },
+          location: details?.geometry?.location || { lat: 0, lng: 0 },
         };
+        
         onCafeSelect(CafeData);
-        // console.log('Data:', data);
-        // console.log('Details:', details);
-        // console.log('Address:', JSON.stringify(details?.formatted_address));
-        // console.log('Location:', JSON.stringify(details?.geometry?.location));
-        // console.log('Place:', JSON.stringify(data?.structured_formatting?.main_text));
       }}
       query={{
-        key: 'AIzaSyDm02Vzk0SDNFVwWSJKRSwSrkFu46M50IQ',
+        key: process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY,
         language: 'en',
       }}
     />
