@@ -22,6 +22,9 @@ import { StarSelect } from '@/components/StarSelect';
 
 import { CafeData } from '@/components/types/CafeData';
 
+import { ThoughtOptionsSection } from '@/components/ThoughtOptionsSection';
+
+
 import { useState } from 'react';
 
 // const colorScheme = useColorScheme();
@@ -29,6 +32,7 @@ import { useState } from 'react';
 export default function AddCafeScreen() {
   const [cafeData, setCafeData] = useState<CafeData | null>(null);
   const [starCount, setStarCount] = useState<Number>(3);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const handleCafeSelect = (data: CafeData) => {
     setCafeData(data);
@@ -37,6 +41,16 @@ export default function AddCafeScreen() {
   const handleStarSelect = (value: Number) => {
     setStarCount(value);
   };
+
+  const handleOptionSelect = (label: string) => {
+    setSelectedOptions(prevOptions => {
+      if (prevOptions.includes(label)) {
+        return prevOptions.filter(opt => opt !== label);
+      } else {
+        return [...prevOptions, label];
+      }
+    })
+  };
   
 
   return (
@@ -44,6 +58,7 @@ export default function AddCafeScreen() {
     <ScrollView style={styles.scrollView} keyboardShouldPersistTaps='always'>
       <ThemedView style={styles.stepContainer}>
         <View>
+          {/* cafe search */}
           <CafeSearch onCafeSelect={handleCafeSelect} />
           {cafeData && (
               <>
@@ -55,6 +70,7 @@ export default function AddCafeScreen() {
             )}
         </View>
 
+        {/* rating */}
         <View style={styles.questionContainer}>
           <ThemedText type="subtitle">How would you rate your overall experience?</ThemedText>
           <StarSelect onStarSelect={handleStarSelect}/>
@@ -66,15 +82,19 @@ export default function AddCafeScreen() {
             )}
         </View>
 
-        <ThemedText type="default">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </ThemedText>
+        {/* thoughts */}
+        <View style={styles.questionContainer}>
+          <ThemedText type="subtitle">What are your thoughts about the café?</ThemedText>
+          <ThoughtOptionsSection onOptionSelect={handleOptionSelect} />
+          {starCount && (
+              <>
+                <ThemedText type="subtitle">Selected Options:</ThemedText>
+                <ThemedText type="default">{selectedOptions.toString()}</ThemedText>
+              </>
+            )}
+        </View>
+
+        {/* adding drinks */}
       </ThemedView>
     </ScrollView>
   </SafeAreaView>
