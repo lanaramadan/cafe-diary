@@ -23,6 +23,8 @@ import { StarSelect } from '@/components/StarSelect';
 import { CafeData } from '@/components/types/CafeData';
 
 import { ThoughtOptionsSection } from '@/components/ThoughtOptionsSection';
+import { NoteTextbox } from '@/components/NoteTextbox';
+
 
 
 import { useState } from 'react';
@@ -33,6 +35,7 @@ export default function AddCafeScreen() {
   const [cafeData, setCafeData] = useState<CafeData | null>(null);
   const [starCount, setStarCount] = useState<Number>(3);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [note, setNote] = useState<string>("");
 
   const handleCafeSelect = (data: CafeData) => {
     setCafeData(data);
@@ -40,6 +43,10 @@ export default function AddCafeScreen() {
   
   const handleStarSelect = (value: Number) => {
     setStarCount(value);
+  };
+
+  const handleNoteChange = (value: string) => {
+    setNote(value);
   };
 
   const handleOptionSelect = (label: string) => {
@@ -82,17 +89,26 @@ export default function AddCafeScreen() {
             )}
         </View>
 
-        {/* thoughts */}
+        {/* options */}
         <View style={styles.questionContainer}>
           <ThemedText type="subtitle">What are your thoughts about the café?</ThemedText>
           <ThoughtOptionsSection onOptionSelect={handleOptionSelect} />
-          {starCount && (
+          <NoteTextbox onChangeText={handleNoteChange} />
+          {selectedOptions && (
               <>
                 <ThemedText type="subtitle">Selected Options:</ThemedText>
                 <ThemedText type="default">{selectedOptions.toString()}</ThemedText>
               </>
-            )}
+          )}
+          {note && (
+            <>
+              <ThemedText type="subtitle">Typed note:</ThemedText>
+              <ThemedText type="default">{note}</ThemedText>
+            </>
+          )}
         </View>
+
+
 
         {/* adding drinks */}
       </ThemedView>
