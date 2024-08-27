@@ -24,6 +24,7 @@ import { CafeData } from '@/components/types/CafeData';
 
 import { ThoughtOptionsSection } from '@/components/ThoughtOptionsSection';
 import { NoteTextbox } from '@/components/NoteTextbox';
+import { SelectedCafe } from '@/components/SelectedCafe';
 
 
 
@@ -67,12 +68,14 @@ export default function AddCafeScreen() {
         <View>
           {/* cafe search */}
           <CafeSearch onCafeSelect={handleCafeSelect} />
+          
           {cafeData && (
               <>
-                <ThemedText type="subtitle">Selected Cafe:</ThemedText>
+                <SelectedCafe name={cafeData.name} address={cafeData.address} />
+                {/* <ThemedText type="subtitle">Selected Cafe:</ThemedText>
                 <ThemedText type="default">{cafeData.name}</ThemedText>
                 <ThemedText type="default">{cafeData.address}</ThemedText>
-                <ThemedText type="default">{cafeData.location.lat}, {cafeData.location.lng}</ThemedText>
+                <ThemedText type="default">{cafeData.location.lat}, {cafeData.location.lng}</ThemedText> */}
               </>
             )}
         </View>
@@ -81,12 +84,6 @@ export default function AddCafeScreen() {
         <View style={styles.questionContainer}>
           <ThemedText type="subtitle">How would you rate your overall experience?</ThemedText>
           <StarSelect onStarSelect={handleStarSelect}/>
-          {starCount && (
-              <>
-                <ThemedText type="subtitle">Selected Star Count:</ThemedText>
-                <ThemedText type="default">{starCount.toString()}</ThemedText>
-              </>
-            )}
         </View>
 
         {/* options */}
@@ -94,18 +91,6 @@ export default function AddCafeScreen() {
           <ThemedText type="subtitle">What are your thoughts about the café?</ThemedText>
           <ThoughtOptionsSection onOptionSelect={handleOptionSelect} />
           <NoteTextbox onChangeText={handleNoteChange} />
-          {selectedOptions && (
-              <>
-                <ThemedText type="subtitle">Selected Options:</ThemedText>
-                <ThemedText type="default">{selectedOptions.toString()}</ThemedText>
-              </>
-          )}
-          {note && (
-            <>
-              <ThemedText type="subtitle">Typed note:</ThemedText>
-              <ThemedText type="default">{note}</ThemedText>
-            </>
-          )}
         </View>
 
 
