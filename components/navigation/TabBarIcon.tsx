@@ -19,7 +19,7 @@ type TabBarIconProps = IconProps<ComponentProps<typeof Ionicons>["name"]> & {
 export function TabBarIcon({ style, focused, ...rest }: TabBarIconProps) {
   return (
     <View style={focused ? [styles.iconContainer, style] : style}>
-      <Ionicons size={28} style={[style]} {...rest} />
+      <Ionicons size={24} style={[style]} {...rest} />
     </View>
   );
 }
